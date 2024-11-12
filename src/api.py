@@ -1,11 +1,7 @@
-#%% Importações necessárias
 import os
 from dotenv import load_dotenv
 import requests
-import json
 
-
-# %% Previsão
 
 class Previsao:
     
@@ -24,7 +20,7 @@ class Previsao:
     def conexao(self, url, params):
         try:
             response = requests.get(url, params=params, timeout=10)
-            response.raise_for_status()  # Levanta uma exceção para códigos de erro HTTP
+            response.raise_for_status()
             print("Consulta realizada com sucesso!")
             return response
         except requests.exceptions.RequestException as e:
@@ -41,8 +37,8 @@ class Previsao:
             """Função para validar a resposta e tratar erro."""
             if response:
                 try:
-                    response.raise_for_status()  # Levanta exceção se status não for 2xx
-                    return response.json()  # Retorna os dados em formato JSON
+                    response.raise_for_status()
+                    return response.json()
                 except requests.exceptions.HTTPError as errh:
                     print(f"Erro HTTP: {errh}")
                 except requests.exceptions.RequestException as e:
